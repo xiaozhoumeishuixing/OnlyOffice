@@ -303,7 +303,10 @@ curl -F "file=@测试文档.docx" http://localhost:8081/api/documents/upload
 └── src/test                   # 单元与 MockWebServer 集成测试
 
 效果预览：
-<img src="./images/home.png" alt="首页" width="500">
-<img src="./images/yulan.png" alt="预览" width="500">
-<img src="./images/bianji.png" alt="编辑" width="500">
+
+![首页](./images/home.png)
+
+![预览](./images/yulan.png)
+
+![编辑](./images/bianji.png)
 ```
