@@ -302,11 +302,11 @@ curl -F "file=@测试文档.docx" http://localhost:8081/api/documents/upload
 ├── src/main/resources/static  # 原生前端
 └── src/test                   # 单元与 MockWebServer 集成测试
 
+
+```
+
 效果预览：
 
 ![首页](./images/home.png)
-
 ![预览](./images/yulan.png)
-
 ![编辑](./images/bianji.png)
-```
