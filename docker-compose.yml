@@ -1,0 +1,53 @@
+services:
+  onlyoffice-document-server:
+    build:
+      context: ./onlyoffice
+    container_name: office-online-onlyoffice
+    ports:
+      - "8080:80"
+    environment:
+      JWT_ENABLED: ${ONLYOFFICE_JWT_ENABLED:-false}
+      JWT_SECRET: ${ONLYOFFICE_JWT_SECRET:-secret}
+    volumes:
+      - onlyoffice_logs:/var/log/onlyoffice
+      - onlyoffice_data:/var/www/onlyoffice/Data
+      - onlyoffice_cache:/var/lib/onlyoffice
+      - onlyoffice_db:/var/lib/postgresql
+    restart: unless-stopped
+
+  app:
+    build: .
+    container_name: office-online-app
+    ports:
+      - "8081:8081"
+    environment:
+      ONLYOFFICE_URL: ${ONLYOFFICE_URL:-http://onlyoffice-document-server}
+      ONLYOFFICE_PUBLIC_URL: ${ONLYOFFICE_PUBLIC_URL:-http://localhost:8080}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL:-http://app:8081}
+      CALLBACK_URL: ${CALLBACK_URL:-http://app:8081/api/onlyoffice/callback}
+      STORAGE_ROOT: ${STORAGE_ROOT:-/data/files}
+      ONLYOFFICE_JWT_SECRET: ${ONLYOFFICE_JWT_SECRET:-secret}
+    volumes:
+      - files_data:/data/files
+    depends_on:
+      - onlyoffice-document-server
+    restart: unless-stopped
+
+  # Optional auxiliary service. OfficeCLI is a local CLI and is not used by the
+  # preview/edit/convert REST flows; enable it with `--profile officecli`.
+  officecli:
+    build: ./officecli
+    container_name: office-online-officecli
+    profiles: ["officecli"]
+    volumes:
+      - files_data:/data/files
+    stdin_open: true
+    tty: true
+    restart: "no"
+
+volumes:
+  onlyoffice_logs:
+  onlyoffice_data:
+  onlyoffice_cache:
+  onlyoffice_db:
+  files_data:

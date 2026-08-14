@@ -1,0 +1,12 @@
+target/
+.m2-repo/
+dist/
+*.log
+data/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.classpath
+.project
+.settings/

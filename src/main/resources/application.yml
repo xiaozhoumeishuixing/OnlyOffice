@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: office-online-document-system
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 110MB
+
+app:
+  # Base URL that OnlyOffice Document Server can use to reach this application.
+  public-url: ${APP_PUBLIC_URL:http://localhost:8081}
+  # Optional full callback URL; defaults to {public-url}/api/onlyoffice/callback.
+  callback-url: ${CALLBACK_URL:}
+  storage:
+    root: ${STORAGE_ROOT:/data/files}
+  onlyoffice:
+    url: ${ONLYOFFICE_URL:http://localhost:8080}
+    public-url: ${ONLYOFFICE_PUBLIC_URL:}
+    jwt-secret: ${ONLYOFFICE_JWT_SECRET:}
+
+logging:
+  level:
+    com.officeonline: INFO

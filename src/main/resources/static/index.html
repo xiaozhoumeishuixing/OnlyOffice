@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Online 文档处理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">
+        <span class="brand-mark"></span>
+        <h1>Office Online</h1>
+    </div>
+    <div class="status" id="connection-status">正在连接</div>
+</header>
+
+<main>
+    <section class="toolbar">
+        <label class="upload-control" for="file-input">
+            <span class="upload-icon">+</span>
+            <span>上传文档</span>
+        </label>
+        <input id="file-input" type="file" hidden
+               accept=".docx,.doc,.xlsx,.xls,.pptx,.ppt,.odt,.ods,.odp,.rtf,.txt,.csv">
+        <div class="upload-status" id="upload-status"></div>
+    </section>
+
+    <section class="list-panel">
+        <div class="list-header">
+            <h2>文档</h2>
+            <span class="count" id="doc-count">0</span>
+        </div>
+        <table class="document-table">
+            <thead>
+            <tr>
+                <th>文件名</th>
+                <th>大小</th>
+                <th>上传时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="document-list"></tbody>
+        </table>
+        <div id="empty" class="empty hidden">暂无文档</div>
+    </section>
+</main>
+
+<div id="editor-overlay" class="editor-overlay hidden">
+    <div class="editor-toolbar">
+        <span class="editor-title" id="editor-title">文档编辑器</span>
+        <button id="editor-close" class="button button-secondary" type="button">关闭</button>
+    </div>
+    <div id="editor-placeholder" class="editor-placeholder"></div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>

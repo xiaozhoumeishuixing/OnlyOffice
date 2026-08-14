@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    container_name: office-online-app
+    ports:
+      - "8081:8081"
+    environment:
+      ONLYOFFICE_URL: ${ONLYOFFICE_URL:-http://onlyoffice-document-server}
+      ONLYOFFICE_PUBLIC_URL: ${ONLYOFFICE_PUBLIC_URL:-}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL:-http://office-online-app:8081}
+      CALLBACK_URL: ${CALLBACK_URL:-http://office-online-app:8081/api/onlyoffice/callback}
+      STORAGE_ROOT: ${STORAGE_ROOT:-/data/files}
+      ONLYOFFICE_JWT_SECRET: ${ONLYOFFICE_JWT_SECRET:-}
+    volumes:
+      - files_data:/data/files
+    networks:
+      - office-net
+    restart: unless-stopped
+
+volumes:
+  files_data:
+
+networks:
+  office-net:
+    external: true
