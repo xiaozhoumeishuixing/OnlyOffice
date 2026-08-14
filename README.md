@@ -301,4 +301,9 @@ curl -F "file=@测试文档.docx" http://localhost:8081/api/documents/upload
 │   └── exception/             # 统一异常
 ├── src/main/resources/static  # 原生前端
 └── src/test                   # 单元与 MockWebServer 集成测试
+
+效果预览：
+![首页](./dist/home.png)
+![预览](./dist/yulan.png)
+![编辑](./dist/bianji.png)
 ```
